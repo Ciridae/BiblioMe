@@ -3,25 +3,34 @@ package com.daw.bibliome.dao.modelo;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "reserva")
-public class Reserva {
+@IdClass(value = ReservaPK.class)
+public class Reserva implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3989109125610602407L;
 
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "isbn_libro")
-	@Column(name = "isbn_libro", nullable = false, length = 2)
+	// @Column(name = "isbn_libro", nullable = false, length = 2)
 	private Libro libro;
 
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
-	@Column(name = "id_usuario", nullable = false, length = 2)
+	// @Column(name = "id_usuario", nullable = false, length = 2)
 	private Usuario usuario;
 
 	@Id

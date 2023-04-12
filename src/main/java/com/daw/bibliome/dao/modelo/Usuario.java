@@ -32,7 +32,7 @@ public class Usuario {
 
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_usuario")
-	@Column(name = "id_tipo_usuario", nullable = false, length = 2)
+	// @Column(name = "id_tipo_usuario", nullable = false, length = 2)
 	private TipoUsuario tipoUsuario;
 
 	public Usuario() {
