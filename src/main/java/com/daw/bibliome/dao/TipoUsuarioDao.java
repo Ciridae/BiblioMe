@@ -1,0 +1,9 @@
+package com.daw.bibliome.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.daw.bibliome.dao.modelo.TipoUsuario;
+
+public interface TipoUsuarioDao extends JpaRepository<TipoUsuario, Integer> {
+
+}

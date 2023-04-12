@@ -18,6 +18,10 @@ import com.daw.bibliome.dao.modelo.Libro;
 import com.daw.bibliome.excepciones.LibroException;
 import com.daw.bibliome.servicio.ServicioLibro;
 
+/**
+ * @author Abel Domínguez Morejón
+ *
+ */
 @RestController
 @RequestMapping("/libros")
 public class ControladorLibro {
@@ -25,32 +29,63 @@ public class ControladorLibro {
 	@Autowired
 	private ServicioLibro servicio;
 
+	/**
+	 * Obtenemos todos los libros
+	 * 
+	 * @return 404 si no hay libros, 200 y lista de libros si hay uno o más
+	 */
 	@GetMapping
-	public List<Libro> consultar() {
-		return this.servicio.consultar();
+	public ResponseEntity<?> consultar() {
+		List<Libro> resultado = this.servicio.consultar();
+
+		if (resultado.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(resultado);
+		}
 	}
 
+	/**
+	 * Obtenemos un libro en base a su ISBN
+	 * 
+	 * @param libroIsbn
+	 * @return 404 si no encuentra el libro, 200 y libro si lo encuentra
+	 */
 	@GetMapping("/{libroIsbn}")
 	public ResponseEntity<?> consultar(@PathVariable Integer libroIsbn) {
 		try {
 			return ResponseEntity.ok(this.servicio.consultar(libroIsbn));
 		} catch (Exception e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
+	/**
+	 * Insertamos un nuevo libro
+	 * 
+	 * @param libro
+	 * @return 409 si ya existe ese ISBN de libro, 201 y el libro insertado si no
+	 *         existe
+	 */
 	@PostMapping
 	public ResponseEntity<?> crear(@RequestBody Libro libro) {
 		try {
 			this.servicio.crear(libro);
-			
+
 			return new ResponseEntity<>("El libro " + libro.getTitulo() + " se ha creado correctamente.",
-					HttpStatus.OK);
+					HttpStatus.CREATED);
 		} catch (LibroException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
 		}
 	}
 
+	/**
+	 * Editamos un libro en base a su ISBN
+	 * 
+	 * @param libroIsbn
+	 * @param libro
+	 * @return 400 si no se actualiza correctamente, 200 si la edición tiene éxito
+	 */
 	@PutMapping("/{libroIsbn}")
 	public ResponseEntity<?> modificar(@PathVariable Integer libroIsbn, @RequestBody Libro libro) {
 		try {
@@ -63,15 +98,21 @@ public class ControladorLibro {
 		}
 	}
 
+	/**
+	 * Eliminamos un libro en base a su ISBN
+	 * 
+	 * @param libroIsbn
+	 * @return 404 si no encuentra el libro, 204 si lo encuentra y lo elimina
+	 */
 	@DeleteMapping("/{libroIsbn}")
 	public ResponseEntity<?> eliminar(@PathVariable Integer libroIsbn) {
 		try {
 			this.servicio.eliminar(libroIsbn);
-			
+
 			return new ResponseEntity<>("El libro con ISBN " + libroIsbn + " ha sido actualizado correctamente.",
-					HttpStatus.OK);
+					HttpStatus.NO_CONTENT);
 		} catch (LibroException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
 }

@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,18 +33,22 @@ public class Libro {
 	@Column(name = "estado", nullable = false)
 	private String estado;
 
+	@ManyToOne
+	@JoinColumn(name = "id_autor")
 	@Column(name = "id_autor", length = 2)
-	private Integer idAutor;
+	private Autor autor;
 
+	@ManyToOne
+	@JoinColumn(name = "id_genero")
 	@Column(name = "id_genero", length = 2)
-	private Integer idGenero;
+	private Genero genero;
 
 	public Libro() {
 		super();
 	}
 
 	public Libro(Integer isbn, String titulo, String sinopsis, Integer numPaginas, String img, String estado,
-			Integer idAutor, Integer idGenero) {
+			Autor autor, Genero genero) {
 		super();
 		this.isbn = isbn;
 		this.titulo = titulo;
@@ -50,8 +56,8 @@ public class Libro {
 		this.numPaginas = numPaginas;
 		this.img = img;
 		this.estado = estado;
-		this.idAutor = idAutor;
-		this.idGenero = idGenero;
+		this.autor = autor;
+		this.genero = genero;
 	}
 
 	public Integer getIsbn() {
@@ -102,20 +108,20 @@ public class Libro {
 		this.estado = estado;
 	}
 
-	public Integer getIdAutor() {
-		return idAutor;
+	public Autor getAutor() {
+		return autor;
 	}
 
-	public void setIdAutor(Integer idAutor) {
-		this.idAutor = idAutor;
+	public void setAutor(Autor autor) {
+		this.autor = autor;
 	}
 
-	public Integer getIdGenero() {
-		return idGenero;
+	public Genero getGenero() {
+		return genero;
 	}
 
-	public void setIdGenero(Integer idGenero) {
-		this.idGenero = idGenero;
+	public void setGenero(Genero genero) {
+		this.genero = genero;
 	}
 
 }
