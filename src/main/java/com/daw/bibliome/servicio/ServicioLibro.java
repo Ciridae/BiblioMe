@@ -9,7 +9,7 @@ public interface ServicioLibro {
 
 	List<Libro> consultar();
 
-	Libro consultar(Integer libroIsbn) throws Exception;
+	Libro consultar(Integer libroIsbn) throws LibroException;
 
 	void crear(Libro libro) throws LibroException;
 

@@ -23,6 +23,7 @@ import com.daw.bibliome.servicio.ServicioLibro;
  *
  */
 @RestController
+// @CrossOrigin(origins = "http://localhost:5000") TODO Agregar la url del frontend para permitir las peticiones
 @RequestMapping("/libros")
 public class ControladorLibro {
 
@@ -55,7 +56,7 @@ public class ControladorLibro {
 	public ResponseEntity<?> consultar(@PathVariable Integer libroIsbn) {
 		try {
 			return ResponseEntity.ok(this.servicio.consultar(libroIsbn));
-		} catch (Exception e) {
+		} catch (LibroException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
