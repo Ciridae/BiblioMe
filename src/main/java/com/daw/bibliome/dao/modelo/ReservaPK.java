@@ -1,6 +1,7 @@
 package com.daw.bibliome.dao.modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class ReservaPK implements Serializable {
 
@@ -12,6 +13,8 @@ public class ReservaPK implements Serializable {
 	private Libro libro;
 
 	private Usuario usuario;
+
+	private Date fechaReserva;
 
 	public Libro getLibro() {
 		return libro;
@@ -27,6 +30,14 @@ public class ReservaPK implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Date getFechaReserva() {
+		return fechaReserva;
+	}
+
+	public void setFechaReserva(Date fechaReserva) {
+		this.fechaReserva = fechaReserva;
 	}
 
 }

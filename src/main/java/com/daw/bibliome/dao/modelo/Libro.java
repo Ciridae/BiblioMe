@@ -35,12 +35,10 @@ public class Libro {
 
 	@ManyToOne
 	@JoinColumn(name = "id_autor")
-	// @Column(name = "id_autor", length = 2)
 	private Autor autor;
 
 	@ManyToOne
 	@JoinColumn(name = "id_genero")
-	// @Column(name = "id_genero", length = 2)
 	private Genero genero;
 
 	public Libro() {

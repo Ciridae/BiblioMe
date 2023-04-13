@@ -24,13 +24,11 @@ public class Reserva implements Serializable {
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "isbn_libro")
-	// @Column(name = "isbn_libro", nullable = false, length = 2)
 	private Libro libro;
 
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
-	// @Column(name = "id_usuario", nullable = false, length = 2)
 	private Usuario usuario;
 
 	@Id
