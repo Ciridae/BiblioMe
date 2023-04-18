@@ -35,4 +35,15 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		throw new UsuarioException("No se ha encontrado el usuario con ID " + id);
 	}
 
+	@Override
+	public Usuario consultarPorEmail(String email) throws UsuarioException {
+		Optional<Usuario> resultado = this.usuarioDao.findByEmail(email);
+
+		if (resultado.isPresent()) {
+			return resultado.get();
+		}
+
+		throw new UsuarioException("No se ha encontrado el usuario con email " + email);
+	}
+
 }

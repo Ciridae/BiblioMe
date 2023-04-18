@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,9 +44,18 @@ public class ControladorUsuario {
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public ResponseEntity<?> consultar(Integer id) {
+	public ResponseEntity<?> consultar(@PathVariable Integer id) {
 		try {
 			return ResponseEntity.ok(this.servicioUsuario.consultar(id));
+		} catch (UsuarioException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping("/email/{email}")
+	public ResponseEntity<?> consultar(@PathVariable String email) {
+		try {
+			return ResponseEntity.ok(this.servicioUsuario.consultarPorEmail(email));
 		} catch (UsuarioException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}

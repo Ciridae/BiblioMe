@@ -11,4 +11,6 @@ public interface ServicioUsuario {
 	
 	Usuario consultar(Integer id) throws UsuarioException;
 
+	Usuario consultarPorEmail(String email) throws UsuarioException;
+
 }
