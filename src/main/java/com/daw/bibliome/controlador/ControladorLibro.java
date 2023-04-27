@@ -23,7 +23,7 @@ import com.daw.bibliome.servicio.ServicioLibro;
  *
  */
 @RestController
-// @CrossOrigin(origins = "http://localhost:5000") TODO Agregar la url del frontend para permitir las peticiones
+// @CrossOrigin(origins = "http://localhost:5173") // TODO Agregar la url del frontend para permitir las peticiones
 @RequestMapping("/libros")
 public class ControladorLibro {
 
