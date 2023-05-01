@@ -32,6 +32,9 @@ public class Libro {
 
 	@Column(name = "estado", nullable = false)
 	private String estado;
+	
+	@Column(name = "saga", nullable = false, length = 100)
+	private String saga;
 
 	@ManyToOne
 	@JoinColumn(name = "id_autor")
@@ -46,7 +49,7 @@ public class Libro {
 	}
 
 	public Libro(Integer isbn, String titulo, String sinopsis, Integer numPaginas, String img, String estado,
-			Autor autor, Genero genero) {
+			String saga, Autor autor, Genero genero) {
 		super();
 		this.isbn = isbn;
 		this.titulo = titulo;
@@ -54,6 +57,7 @@ public class Libro {
 		this.numPaginas = numPaginas;
 		this.img = img;
 		this.estado = estado;
+		this.saga = saga;
 		this.autor = autor;
 		this.genero = genero;
 	}
@@ -122,4 +126,13 @@ public class Libro {
 		this.genero = genero;
 	}
 
+	public String getSaga() {
+		return saga;
+	}
+
+	public void setSaga(String saga) {
+		this.saga = saga;
+	}
+
+	
 }

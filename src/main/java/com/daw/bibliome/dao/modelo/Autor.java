@@ -24,17 +24,34 @@ public class Autor {
 
 	@Column(name = "img", nullable = false, length = 100)
 	private String img;
+	
+	@Column(name = "nacido", nullable = false, length = 100)
+	private String nacido;
+	
+	@Column(name = "web", nullable = false, length = 100)
+	private String web;
+	
+	@Column(name = "twitter", nullable = false, length = 100)
+	private String twitter;
+	
+	@Column(name = "autor_desde", nullable = true, length = 100)
+	private String autorDesde;
 
 	public Autor() {
 		super();
 	}
-
-	public Autor(Integer id, String nombre, String apellidos, String img) {
+	
+	public Autor(Integer id, String nombre, String apellidos, String img, String nacido, String web, String twitter,
+			String autorDesde) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.img = img;
+		this.nacido = nacido;
+		this.web = web;
+		this.twitter = twitter;
+		this.autorDesde = autorDesde;
 	}
 
 	public Integer getId() {
@@ -68,5 +85,39 @@ public class Autor {
 	public void setImg(String img) {
 		this.img = img;
 	}
+
+	public String getNacido() {
+		return nacido;
+	}
+
+	public void setNacido(String nacido) {
+		this.nacido = nacido;
+	}
+
+	public String getWeb() {
+		return web;
+	}
+
+	public void setWeb(String web) {
+		this.web = web;
+	}
+
+	public String getTwitter() {
+		return twitter;
+	}
+
+	public void setTwitter(String twitter) {
+		this.twitter = twitter;
+	}
+
+	public String getAutorDesde() {
+		return autorDesde;
+	}
+
+	public void setAutorDesde(String autorDesde) {
+		this.autorDesde = autorDesde;
+	}
+	
+	
 
 }
