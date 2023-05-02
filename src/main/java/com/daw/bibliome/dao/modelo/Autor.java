@@ -24,25 +24,28 @@ public class Autor {
 
 	@Column(name = "img", nullable = false, length = 100)
 	private String img;
-	
+
 	@Column(name = "nacido", nullable = false, length = 100)
 	private String nacido;
-	
+
 	@Column(name = "web", nullable = false, length = 100)
 	private String web;
-	
+
 	@Column(name = "twitter", nullable = false, length = 100)
 	private String twitter;
-	
+
 	@Column(name = "autor_desde", nullable = true, length = 100)
 	private String autorDesde;
+
+	@Column(name = "biografia", nullable = true, length = 2000)
+	private String biografia;
 
 	public Autor() {
 		super();
 	}
-	
+
 	public Autor(Integer id, String nombre, String apellidos, String img, String nacido, String web, String twitter,
-			String autorDesde) {
+			String autorDesde, String biografia) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -52,6 +55,7 @@ public class Autor {
 		this.web = web;
 		this.twitter = twitter;
 		this.autorDesde = autorDesde;
+		this.biografia = biografia;
 	}
 
 	public Integer getId() {
@@ -117,7 +121,13 @@ public class Autor {
 	public void setAutorDesde(String autorDesde) {
 		this.autorDesde = autorDesde;
 	}
-	
-	
+
+	public String getBiografia() {
+		return biografia;
+	}
+
+	public void setBiografia(String biografia) {
+		this.biografia = biografia;
+	}
 
 }
