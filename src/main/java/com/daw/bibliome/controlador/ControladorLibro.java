@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.daw.bibliome.dao.modelo.Autor;
 import com.daw.bibliome.dao.modelo.Libro;
 import com.daw.bibliome.excepciones.LibroException;
 import com.daw.bibliome.servicio.ServicioLibro;
@@ -56,6 +57,15 @@ public class ControladorLibro {
 	public ResponseEntity<?> consultar(@PathVariable Integer libroIsbn) {
 		try {
 			return ResponseEntity.ok(this.servicio.consultar(libroIsbn));
+		} catch (LibroException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@GetMapping("/{idAutor}")
+	public ResponseEntity<?> consultarPorAutor(@PathVariable Integer idAutor, @RequestBody Autor autor) {
+		try {
+			return ResponseEntity.ok(this.servicio.consultarPorAutor(autor));
 		} catch (LibroException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}

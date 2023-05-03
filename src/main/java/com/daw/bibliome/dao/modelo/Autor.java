@@ -1,10 +1,13 @@
 package com.daw.bibliome.dao.modelo;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -39,6 +42,10 @@ public class Autor {
 
 	@Column(name = "biografia", nullable = true, length = 2000)
 	private String biografia;
+
+	@OneToMany(targetEntity = Libro.class, mappedBy = "autor")
+	// @JoinColumn(name = "libros", referencedColumnName = "id")
+	private List<Libro> libros;
 
 	public Autor() {
 		super();
@@ -128,6 +135,14 @@ public class Autor {
 
 	public void setBiografia(String biografia) {
 		this.biografia = biografia;
+	}
+
+	public List<Libro> getLibros() {
+		return libros;
+	}
+
+	public void setLibros(List<Libro> libros) {
+		this.libros = libros;
 	}
 
 }

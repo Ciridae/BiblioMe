@@ -9,6 +9,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.daw.bibliome.dao.LibroDao;
+import com.daw.bibliome.dao.modelo.Autor;
 import com.daw.bibliome.dao.modelo.Libro;
 import com.daw.bibliome.excepciones.LibroException;
 import com.daw.bibliome.servicio.ServicioLibro;
@@ -39,7 +40,18 @@ public class ServicioLibroImpl implements ServicioLibro {
 
 		throw new LibroException("No se ha encontrado el libro con ISBN " + libroIsbn);
 	}
-	
+
+	@Override
+	public List<Libro> consultarPorAutor(Autor autor) throws LibroException {
+		List<Libro> libros = this.libroDao.findByAutor(autor);
+
+		if (libros.isEmpty()) {
+			throw new LibroException("No se han encontrado libros del autor con id " + autor.getId());
+		}
+
+		return libros;
+	}
+
 	@Override
 	public void crear(Libro libro) throws LibroException {
 		try {
@@ -47,8 +59,9 @@ public class ServicioLibroImpl implements ServicioLibro {
 			if (resultado.isPresent()) {
 				throw new LibroException("El libro con ISBN " + libro.getIsbn() + " ya existe.");
 			}
-		} catch (EmptyResultDataAccessException e) {}
-		
+		} catch (EmptyResultDataAccessException e) {
+		}
+
 		this.libroDao.save(libro);
 	}
 
@@ -70,7 +83,5 @@ public class ServicioLibroImpl implements ServicioLibro {
 			throw new LibroException("El libro con ISBN " + libroIsbn + " no existe.");
 		}
 	}
-
-
 
 }
