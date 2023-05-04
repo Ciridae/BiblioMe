@@ -32,12 +32,13 @@ public class Libro {
 
 	@Column(name = "estado", nullable = false)
 	private String estado;
-	
+
 	@Column(name = "saga", nullable = false, length = 100)
 	private String saga;
 
 	@ManyToOne
 	@JoinColumn(name = "id_autor")
+	// @JsonBackReference
 	private Autor autor;
 
 	@ManyToOne
@@ -134,5 +135,4 @@ public class Libro {
 		this.saga = saga;
 	}
 
-	
 }

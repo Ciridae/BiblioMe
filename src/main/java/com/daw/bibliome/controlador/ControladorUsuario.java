@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,7 +54,7 @@ public class ControladorUsuario {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@GetMapping("/email/{email}")
 	public ResponseEntity<?> consultar(@PathVariable String email) {
 		try {
@@ -62,8 +63,8 @@ public class ControladorUsuario {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	@GetMapping("/login")
+
+	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody Map<String, String> usuario) {
 		try {
 			return ResponseEntity.ok(this.servicioUsuario.login(usuario));
