@@ -1,19 +1,14 @@
 package com.daw.bibliome.dao.modelo;
 
-import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Table(name = "reserva")
-@IdClass(value = ReservaPK.class)
+//@IdClass(value = ReservaPK.class)
 public class Reserva implements Serializable {
 
 	/**
@@ -21,53 +16,42 @@ public class Reserva implements Serializable {
 	 */
 	private static final long serialVersionUID = -3989109125610602407L;
 
-	@Id
-	@ManyToOne
-	@JoinColumn(name = "isbn_libro")
-	private Libro libro;
+//	@Id
+//	@ManyToOne
+//	@JoinColumn(name = "isbn_libro")
+//	private Libro libro;
+//
+//	@Id
+//	@ManyToOne
+//	@JoinColumn(name = "id_usuario")
+//	private Usuario usuario;
+//
+//	@Id
+//	@Column(name = "fecha_reserva", nullable = false)
+//	private Date fechaReserva;
 
-	@Id
-	@ManyToOne
-	@JoinColumn(name = "id_usuario")
-	private Usuario usuario;
-
-	@Id
-	@Column(name = "fecha_reserva", nullable = false)
-	private Date fechaReserva;
+	@EmbeddedId
+	private ReservaPK reservaPK;
 
 	public Reserva() {
 		super();
 	}
 
-	public Reserva(Libro libro, Usuario usuario, Date fechaReserva) {
+	public Reserva(ReservaPK reservaPK) {
 		super();
-		this.libro = libro;
-		this.usuario = usuario;
-		this.fechaReserva = fechaReserva;
+		this.reservaPK = reservaPK;
 	}
 
-	public Libro getLibro() {
-		return libro;
+	public ReservaPK getReservaPK() {
+		return reservaPK;
 	}
 
-	public void setLibro(Libro libro) {
-		this.libro = libro;
+	public void setReservaPK(ReservaPK reservaPK) {
+		this.reservaPK = reservaPK;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Date getFechaReserva() {
-		return fechaReserva;
-	}
-
-	public void setFechaReserva(Date fechaReserva) {
-		this.fechaReserva = fechaReserva;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

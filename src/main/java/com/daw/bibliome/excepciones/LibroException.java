@@ -6,7 +6,7 @@ public class LibroException extends Exception {
 	public LibroException() {
 
 	}
-	
+
 	public LibroException(String mensajeError) {
 		super(mensajeError);
 	}
