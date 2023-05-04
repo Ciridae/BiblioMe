@@ -1,6 +1,7 @@
 package com.daw.bibliome.servicio.impl;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,17 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		}
 
 		throw new UsuarioException("No se ha encontrado el usuario con email " + email);
+	}
+
+	@Override
+	public Usuario login(Map<String, String> usuario) throws UsuarioException {
+		Usuario usuarioPorEmail = this.consultarPorEmail(usuario.get("email"));
+		
+		if (usuarioPorEmail.getPassword().equals(usuario.get("password"))) {
+			return usuarioPorEmail;
+		}
+		
+		throw new UsuarioException("La contraseña es incorrecta");
 	}
 
 }

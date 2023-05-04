@@ -1,12 +1,14 @@
 package com.daw.bibliome.controlador;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,6 +58,15 @@ public class ControladorUsuario {
 	public ResponseEntity<?> consultar(@PathVariable String email) {
 		try {
 			return ResponseEntity.ok(this.servicioUsuario.consultarPorEmail(email));
+		} catch (UsuarioException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping("/login")
+	public ResponseEntity<?> login(@RequestBody Map<String, String> usuario) {
+		try {
+			return ResponseEntity.ok(this.servicioUsuario.login(usuario));
 		} catch (UsuarioException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}

@@ -1,11 +1,16 @@
 package com.daw.bibliome.dao.modelo;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "autor")
@@ -40,9 +45,9 @@ public class Autor {
 	@Column(name = "biografia", nullable = true, length = 2000)
 	private String biografia;
 
-	/*
-	 * @OneToMany(mappedBy="autor") private List<Libro> libros;
-	 */
+	@OneToMany(mappedBy = "autor")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private List<Libro> libros;
 
 	public Autor() {
 		super();
@@ -62,14 +67,20 @@ public class Autor {
 		this.biografia = biografia;
 	}
 
-	/*
-	 * public Autor(Integer id, String nombre, String apellidos, String img, String
-	 * nacido, String web, String twitter, String autorDesde, String biografia,
-	 * List<Libro> libros) { super(); this.id = id; this.nombre = nombre;
-	 * this.apellidos = apellidos; this.img = img; this.nacido = nacido; this.web =
-	 * web; this.twitter = twitter; this.autorDesde = autorDesde; this.biografia =
-	 * biografia; this.libros = libros; }
-	 */
+	public Autor(Integer id, String nombre, String apellidos, String img, String nacido, String web, String twitter,
+			String autorDesde, String biografia, List<Libro> libros) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.img = img;
+		this.nacido = nacido;
+		this.web = web;
+		this.twitter = twitter;
+		this.autorDesde = autorDesde;
+		this.biografia = biografia;
+		this.libros = libros;
+	}
 
 	public Integer getId() {
 		return id;
@@ -143,10 +154,12 @@ public class Autor {
 		this.biografia = biografia;
 	}
 
-	/*
-	 * public List<Libro> getLibros() { return libros; }
-	 * 
-	 * public void setLibros(List<Libro> libros) { this.libros = libros; }
-	 */
+	public List<Libro> getLibros() {
+		return libros;
+	}
+
+	public void setLibros(List<Libro> libros) {
+		this.libros = libros;
+	}
 
 }
