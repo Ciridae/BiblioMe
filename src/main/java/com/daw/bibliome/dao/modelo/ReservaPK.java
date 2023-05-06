@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Embeddable
 public class ReservaPK implements Serializable {
 
@@ -25,6 +27,7 @@ public class ReservaPK implements Serializable {
 	private Integer id;
 
 	@Column(name = "fecha_reserva")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date fechaReserva;
 
 	public ReservaPK() {
