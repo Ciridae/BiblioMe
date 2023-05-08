@@ -27,6 +27,17 @@ public class ServicioReservaImpl implements ServicioReserva {
 	}
 
 	@Override
+	public List<Reserva> consultarPorUsuario(Integer idUsuario) throws ReservaException {
+		List<Reserva> reservas = this.reservaDao.findByReservaPKId(idUsuario);
+		
+		if (reservas.isEmpty()) {
+			throw new ReservaException("No se ha encontrado ninguna reserva del usuario con ID: " + idUsuario);
+		}
+		
+		return reservas;
+	}
+
+	@Override
 	public void crear(Reserva reserva) throws ReservaException {
 		try {
 			ReservaPK reservaPK = new ReservaPK(reserva.getReservaPK().getIsbn(), reserva.getReservaPK().getId(),

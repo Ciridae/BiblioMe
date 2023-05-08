@@ -9,6 +9,8 @@ public interface ServicioReserva {
 
 	List<Reserva> consultar();
 
+	List<Reserva> consultarPorUsuario(Integer idUsuario) throws ReservaException;
+
 	void crear(Reserva reserva) throws ReservaException;
 
 }
