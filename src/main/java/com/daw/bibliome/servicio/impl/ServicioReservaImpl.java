@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.daw.bibliome.dao.ReservaDao;
 import com.daw.bibliome.dao.modelo.Reserva;
 import com.daw.bibliome.dao.modelo.ReservaPK;
+import com.daw.bibliome.dao.modelo.Usuario;
 import com.daw.bibliome.excepciones.ReservaException;
 import com.daw.bibliome.servicio.ServicioReserva;
 
@@ -27,11 +28,11 @@ public class ServicioReservaImpl implements ServicioReserva {
 	}
 
 	@Override
-	public List<Reserva> consultarPorUsuario(Integer idUsuario) throws ReservaException {
-		List<Reserva> reservas = this.reservaDao.findByReservaPKId(idUsuario);
+	public List<Reserva> consultarPorUsuario(Usuario usuario) throws ReservaException {
+		List<Reserva> reservas = this.reservaDao.findByReservaPKUsuario(usuario);
 		
 		if (reservas.isEmpty()) {
-			throw new ReservaException("No se ha encontrado ninguna reserva del usuario con ID: " + idUsuario);
+			throw new ReservaException("No se ha encontrado ninguna reserva del usuario con ID: " + usuario.getId());
 		}
 		
 		return reservas;
@@ -40,7 +41,7 @@ public class ServicioReservaImpl implements ServicioReserva {
 	@Override
 	public void crear(Reserva reserva) throws ReservaException {
 		try {
-			ReservaPK reservaPK = new ReservaPK(reserva.getReservaPK().getIsbn(), reserva.getReservaPK().getId(),
+			ReservaPK reservaPK = new ReservaPK(reserva.getReservaPK().getLibro(), reserva.getReservaPK().getUsuario(),
 					reserva.getReservaPK().getFechaReserva());
 			Optional<Reserva> resultado = Optional.ofNullable(this.reservaDao.findByReservaPK(reservaPK));
 			if (resultado.isPresent()) {

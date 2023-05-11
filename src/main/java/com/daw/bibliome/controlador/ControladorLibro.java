@@ -62,7 +62,7 @@ public class ControladorLibro {
 		}
 	}
 
-	@GetMapping("/por_autor/{idAutor}")
+	@PostMapping("/por_autor/{idAutor}")
 	public ResponseEntity<?> consultarPorAutor(@PathVariable Integer idAutor, @RequestBody Autor autor) {
 		try {
 			return ResponseEntity.ok(this.servicio.consultarPorAutor(autor));

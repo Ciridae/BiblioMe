@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.daw.bibliome.dao.modelo.Reserva;
+import com.daw.bibliome.dao.modelo.Usuario;
 import com.daw.bibliome.excepciones.ReservaException;
 import com.daw.bibliome.servicio.ServicioReserva;
 
@@ -34,10 +35,10 @@ public class ControladorReserva {
 		}
 	}
 	
-	@GetMapping("/{idUsuario}")
-	public ResponseEntity<?> consultarPorUsuario(@PathVariable Integer idUsuario) {
+	@PostMapping("/{idUsuario}")
+	public ResponseEntity<?> consultarPorUsuario(@PathVariable Integer idUsuario, @RequestBody Usuario usuario) {
 		try {
-			return ResponseEntity.ok(this.servicioReserva.consultarPorUsuario(idUsuario));
+			return ResponseEntity.ok(this.servicioReserva.consultarPorUsuario(usuario));
 		} catch (ReservaException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
@@ -48,8 +49,8 @@ public class ControladorReserva {
 		try {
 			this.servicioReserva.crear(reserva);
 
-			return new ResponseEntity<>("La reserva con datos: " + reserva.getReservaPK().getIsbn() + ", "
-					+ reserva.getReservaPK().getId() + ", " + reserva.getReservaPK().getFechaReserva() + " se ha creado.", HttpStatus.CREATED);
+			return new ResponseEntity<>("La reserva con datos: " + reserva.getReservaPK().getLibro().getIsbn() + ", "
+					+ reserva.getReservaPK().getUsuario().getId() + ", " + reserva.getReservaPK().getFechaReserva() + " se ha creado.", HttpStatus.CREATED);
 		} catch (ReservaException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
 		}
