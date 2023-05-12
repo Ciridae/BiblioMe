@@ -16,4 +16,6 @@ public interface ServicioUsuario {
 
 	Usuario login(Map<String, String> usuario) throws UsuarioException;
 
+	void registrar(Usuario usuario) throws UsuarioException;
+
 }

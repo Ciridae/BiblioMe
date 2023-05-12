@@ -72,4 +72,16 @@ public class ControladorUsuario {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
+
+	@PostMapping("/registro")
+	public ResponseEntity<?> registrar(@RequestBody Usuario usuario) {
+		try {
+			this.servicioUsuario.registrar(usuario);
+
+			return new ResponseEntity<>("El libro " + usuario.getEmail() + " se ha creado correctamente.",
+					HttpStatus.CREATED);
+		} catch (UsuarioException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+	}
 }
