@@ -51,7 +51,7 @@ public class ServicioReservaImpl implements ServicioReserva {
 
 		}
 
-		this.reservaDao.save(reserva);
+		this.reservaDao.saveAndFlush(reserva);
 	}
 
 }

@@ -69,7 +69,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 			usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 			usuario.setTipoUsuario(new TipoUsuario(2, "estándar", 2));
 
-			this.usuarioDao.save(usuario);
+			this.usuarioDao.saveAndFlush(usuario);
 		} else {
 			throw new UsuarioException("Ya existe un usuario con ese email");
 		}

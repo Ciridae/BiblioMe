@@ -18,10 +18,6 @@ public class ReservaPK implements Serializable {
 	 */
 	private static final long serialVersionUID = -6675550594825480466L;
 
-//	private Libro libro;
-//
-//	private Usuario usuario;
-
 	@ManyToOne
 	@JoinColumn(name = "isbn_libro")
 	private Libro libro;
