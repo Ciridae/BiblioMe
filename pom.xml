@@ -11,7 +11,7 @@
 	<groupId>com.daw</groupId>
 	<artifactId>bibliome</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>BiblioMe</name>
 	<description>Aplicación que devuelve datos de una base de datos sobre una biblioteca.</description>
 	<properties>
