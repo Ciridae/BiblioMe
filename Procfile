@@ -1,1 +1,1 @@
-web: java -jar target/bibliome-0.0.1-SNAPSHOT.jar
+web: java $JAVA_OPTS -jar target/bibliome-0.0.1-SNAPSHOT.jar $JAR_OPTS
